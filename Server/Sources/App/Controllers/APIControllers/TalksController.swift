@@ -32,7 +32,7 @@ final class TalksController: RouteCollection {
       .flatMap { talk in
         talk.delete(on: req)
       }
-      .transform(to: .ok)
+      .transform(to: .noContent)
   }
 
   func get(_ req: Request) throws -> Future<Talk> {
