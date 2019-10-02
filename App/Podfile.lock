@@ -1,0 +1,51 @@
+PODS:
+  - Realm (3.19.0):
+    - Realm/Headers (= 3.19.0)
+  - Realm/Headers (3.19.0)
+  - RealmSwift (3.19.0):
+    - Realm (= 3.19.0)
+  - Reusable (4.1.0):
+    - Reusable/Storyboard (= 4.1.0)
+    - Reusable/View (= 4.1.0)
+  - Reusable/Storyboard (4.1.0)
+  - Reusable/View (4.1.0)
+  - SwiftDate (6.1.0)
+  - SwiftGen (6.1.0)
+  - SwiftLint (0.35.0)
+  - SwiftyBeaver (1.8.2)
+  - SwiftyUserDefaults (4.0.0)
+
+DEPENDENCIES:
+  - RealmSwift (~> 3.19)
+  - Reusable (~> 4.1)
+  - SwiftDate (~> 6.1)
+  - SwiftGen (~> 6.1)
+  - SwiftLint (~> 0.35)
+  - SwiftyBeaver (~> 1.8)
+  - SwiftyUserDefaults (~> 4.0)
+
+SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - Realm
+    - RealmSwift
+    - Reusable
+    - SwiftDate
+    - SwiftLint
+    - SwiftyBeaver
+    - SwiftyUserDefaults
+  https://github.com/CocoaPods/Specs.git:
+    - SwiftGen
+
+SPEC CHECKSUMS:
+  Realm: 995d585bcf699aaff226715886c849a29dd3d07f
+  RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
+  Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
+  SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
+  SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
+  SwiftLint: 5553187048b900c91aa03552807681bb6b027846
+  SwiftyBeaver: aaf2ebd7dac2e952991f46a82ed24ad642867ae2
+  SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
+
+PODFILE CHECKSUM: 4c03d28ceb77ddd5f367e8b674c35af6b143b672
+
+COCOAPODS: 1.8.0

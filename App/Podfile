@@ -1,0 +1,42 @@
+source 'https://cdn.cocoapods.org'
+
+project './EventApp/EventApp.xcodeproj'
+
+use_frameworks!
+
+# Pods shared across all targets
+def shared_pods
+
+  # Core
+  pod 'RealmSwift', '~> 3.19'
+
+  pod 'SwiftyUserDefaults', '~> 4.0'
+  pod 'SwiftDate', '~> 6.1'
+  
+  # Utilities
+  pod 'SwiftyBeaver', '~> 1.8'
+  pod 'SwiftGen', '~> 6.1'
+  pod 'SwiftLint', '~> 0.35'
+  
+end
+
+inhibit_all_warnings!
+
+abstract_target 'AppCommon' do
+
+  platform :ios, '12.0'
+
+  shared_pods
+
+  target 'EventAppCore' do
+
+  end
+
+  target 'EventApp' do
+
+    # UI
+    pod 'Reusable', '~> 4.1'
+
+  end
+
+end

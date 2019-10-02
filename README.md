@@ -1,20 +1,48 @@
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/1342803/36623515-7293b4ec-18d3-11e8-85ab-4e2f8fb38fbd.png" width="320" alt="API Template">
-    <br>
-    <br>
-    <a href="http://docs.vapor.codes/3.0/">
-        <img src="http://img.shields.io/badge/read_the-docs-2196f3.svg" alt="Documentation">
-    </a>
-    <a href="https://discord.gg/vapor">
-        <img src="https://img.shields.io/discord/431917998102675485.svg" alt="Team Chat">
-    </a>
-    <a href="LICENSE">
-        <img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
-    </a>
-    <a href="https://circleci.com/gh/vapor/api-template">
-        <img src="https://circleci.com/gh/vapor/api-template.svg?style=shield" alt="Continuous Integration">
-    </a>
-    <a href="https://swift.org">
-        <img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4.1">
-    </a>
-</p>
+# Swift Server - Let's get started
+
+a FrenchKit 2019 classroom to help people discover swift on the server using the vapor framework.
+
+## Requirements
+
+* a mac running xcode 11.x
+* or
+  * a mac running xcode 10.2.x or even the text editor of your choice
+  * or any pc running linux where swift is officially supported (a raspberry pi is one of those)
+  * swift tools
+    * by installing xcode command line tools
+    * or following the https://swift.org/getting-started/ steps for linux
+
+## Steps
+
+1. [Build a simple CRUD service using REST routing on top of a SQLite storage](#build-a-simple-crud-service)
+2. [Write unit tests for it](#unit-testing-your-vapor-server)
+3. [Testing it on linux using a docker image](#testing-on-linux-using-docker)
+4. [Deploying on docker (so basically everywhere)](#deploying-using-docker)
+5. [(for speedrunners) share the model with the iOS client to display content](#share-your-model-with-other-clients-ios-example)
+6. [(for really serious guys) build the web page displaying that content and helping creating a new one.](#build-a-web-page-to-manage-it)
+
+### How to build and run
+
+* If you're using xcode 11
+  * simply open `Package.swift`, it will fetch the dependencies for you 🥰.
+  * then build & run the 'Run' scheme on `My Mac`
+* If you're using xcode 10.x
+  * open the Terminal and run `swift package generate-xcodeproj`
+  * then open the generated `fk-swift-server.xcodeproj`
+  * then build & run the 'Run' scheme on `My Mac`
+* If you're using linux
+  * open the Terminal and run `swift package update` to fetch the dependencies
+  * edit the source using your favorite text editor
+  * build by typing `swift build`
+  * test by typing `swift test`
+  * run by typing `swift run`
+
+## Build a simple CRUD service
+
+## Share your model with your app
+
+## Unit testing your vapor server
+
+## Testing on linux using docker
+
+## Deploying using docker

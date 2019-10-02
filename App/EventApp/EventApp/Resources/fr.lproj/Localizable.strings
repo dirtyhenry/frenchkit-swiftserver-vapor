@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  EventApp
+
+  Copyright © 2018 harpp. All rights reserved.
+*/
+
+"appname" = "EventApp";
+
+//Commons
+"common.ok" = "Ok";
+"common.cancel" = "Annuler";
+"common.add" = "Ajouter";
+
+//Listing
+"listing.title" = "Talks";
+"listing.empty.title" = "Aucun talk pour le moment !";
+"listing.empty.description" = "Êtes-vous sûr de vendre des tickets?";
+"listing.error.title" = "Quelque chose d'inatendu s'est produit";
+
+//Talk
+"talk.add.title" = "Ajout d'un talk";
+"talk.name.title" = "Titre";
+"talk.name.placeholder" = "Titre accrocheur";
+"talk.speaker.name.title" = "Présenté par";
+"talk.speaker.name.placeholder" = "Nom";
+"talk.date.title" = "Date prévue";
+"talk.date.ask" = "Programmé ?";
+"talk.date.alarm" = "Créneau";
+"talk.date.now" = "à l'instant";
+"talk.notes.title" = "Notes";
+"talk.delete" = "Supprimer ce talk 😢";
