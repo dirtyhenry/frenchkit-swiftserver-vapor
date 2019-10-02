@@ -85,6 +85,13 @@ Docker permits that by using a Dockerfile to run `swift test` on a linux contain
 
 `XCTest` is implemented on linux but needs extra code since it won't use the Objective-C runtime to list all testing methods.
 
+### To test
+
+* [ ] Run `docker build .` into the Server directory to build the image
+* [ ] Run the image you've just built `docker run <image id>`
+
+`web.Dockerfile` is unused here, it's an example of a production Dockerfile which uses one image to build and another to execute.
+
 ## Going further
 
 * [ ] Add a Speaker relation to the Talk (and adapt the iOS app)
