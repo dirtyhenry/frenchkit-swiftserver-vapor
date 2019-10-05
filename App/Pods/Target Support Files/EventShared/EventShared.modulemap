@@ -1,0 +1,6 @@
+framework module EventShared {
+  umbrella header "EventShared-umbrella.h"
+
+  export *
+  module * { export * }
+}

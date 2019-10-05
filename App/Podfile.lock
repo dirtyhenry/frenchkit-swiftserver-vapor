@@ -1,4 +1,5 @@
 PODS:
+  - EventShared (0.1.0)
   - Realm (3.19.0):
     - Realm/Headers (= 3.19.0)
   - Realm/Headers (3.19.0)
@@ -16,6 +17,7 @@ PODS:
   - SwiftyUserDefaults (4.0.0)
 
 DEPENDENCIES:
+  - EventShared (from `https://github.com/iGranDav/frenchkit-swift-shared.git`, tag `0.1.0`)
   - RealmSwift (~> 3.19)
   - Reusable (~> 4.1)
   - SwiftDate (~> 6.1)
@@ -36,7 +38,18 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - SwiftGen
 
+EXTERNAL SOURCES:
+  EventShared:
+    :git: https://github.com/iGranDav/frenchkit-swift-shared.git
+    :tag: 0.1.0
+
+CHECKOUT OPTIONS:
+  EventShared:
+    :git: https://github.com/iGranDav/frenchkit-swift-shared.git
+    :tag: 0.1.0
+
 SPEC CHECKSUMS:
+  EventShared: abc6c3a33e8317b9df70c0d4354e62921e8b3e47
   Realm: 995d585bcf699aaff226715886c849a29dd3d07f
   RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
   Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
@@ -46,6 +59,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: aaf2ebd7dac2e952991f46a82ed24ad642867ae2
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: 4c03d28ceb77ddd5f367e8b674c35af6b143b672
+PODFILE CHECKSUM: dc0666a3e6e1d75bb548078c2fb59e5f1afbd90b
 
 COCOAPODS: 1.8.0

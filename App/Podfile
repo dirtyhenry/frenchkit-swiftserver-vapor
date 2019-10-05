@@ -30,6 +30,7 @@ abstract_target 'AppCommon' do
 
   target 'EventAppCore' do
 
+    pod 'EventShared', :git => 'https://github.com/iGranDav/frenchkit-swift-shared.git', :tag => '0.1.0'
   end
 
   target 'EventApp' do

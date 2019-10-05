@@ -28,6 +28,7 @@ class ListingViewController: UITableViewController {
     }
   }
 
+  private let fetcher = TalksFetcher()
   private var talksToken: NotificationToken?
 
   // MARK: - Setup
@@ -126,6 +127,8 @@ class ListingViewController: UITableViewController {
 
     let talks = Realm.safeRealm.objects(Talk.self).sorted(byKeyPath: #keyPath(Talk.dateModified))
     state = talks.isEmpty ? .empty : .data(talks)
+
+    fetcher.fetchAll()
 
     refreshControl?.endRefreshing()
   }
