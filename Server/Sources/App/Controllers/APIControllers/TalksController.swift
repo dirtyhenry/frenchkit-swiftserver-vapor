@@ -1,4 +1,5 @@
 import Vapor
+import EventShared
 
 /// Controls basic CRUD operations on `Talk`s.
 final class TalksController: RouteCollection {
@@ -17,13 +18,17 @@ final class TalksController: RouteCollection {
   // MARK: - Routes implementation
 
   /// Returns a list of all `Talk`s.
-  func index(_ req: Request) throws -> Future<[Talk]> {
-    return Talk.query(on: req).all()
+  func index(_ req: Request) throws -> Future<[EventShared.Talk]> {
+    return Talk.query(on: req).all().map {
+      $0.compactMap { (talk) in
+        talk.toPublic()
+      }
+    }
   }
 
   /// Saves a decoded `Talk` to the database.
-  func create(_ req: Request, talk: Talk) throws -> Future<Talk> {
-    return talk.save(on: req)
+  func create(_ req: Request, talk: Talk) throws -> Future<EventShared.Talk> {
+    return talk.save(on: req).toPublic()
   }
 
   /// Deletes a parameterized `Talk`.
@@ -35,11 +40,11 @@ final class TalksController: RouteCollection {
       .transform(to: .noContent)
   }
 
-  func get(_ req: Request) throws -> Future<Talk> {
-    return try req.parameters.next(Talk.self)
+  func get(_ req: Request) throws -> Future<EventShared.Talk> {
+    return try req.parameters.next(Talk.self).toPublic()
   }
 
-  func update(_ req: Request) throws -> Future<Talk> {
+  func update(_ req: Request) throws -> Future<EventShared.Talk> {
 
     return flatMap(
       try req.parameters.next(Talk.self),
@@ -64,7 +69,7 @@ final class TalksController: RouteCollection {
       }
 
       //and save
-      return talkToUpdate.save(on: req)
+      return talkToUpdate.save(on: req).toPublic()
     }
 
   }
