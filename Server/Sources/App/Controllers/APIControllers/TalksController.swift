@@ -36,12 +36,36 @@ final class TalksController: RouteCollection {
   }
 
   func get(_ req: Request) throws -> Future<Talk> {
-    // Please implement this
-    throw Abort(.notFound)
+    return try req.parameters.next(Talk.self)
   }
 
   func update(_ req: Request) throws -> Future<Talk> {
-    // Please implement this
-    throw Abort(.notFound)
+
+    return flatMap(
+      try req.parameters.next(Talk.self),
+      try req.content.decode(Talk.Update.self)
+    ) { talkToUpdate, updatedInfos in
+
+      //Update our talk
+      if let title = updatedInfos.title {
+        talkToUpdate.title = title
+      }
+
+      if let date = updatedInfos.date {
+        talkToUpdate.date = date
+      }
+
+      if let speakerName = updatedInfos.speakerName {
+        talkToUpdate.speakerName = speakerName
+      }
+
+      if let notes = updatedInfos.notes {
+        talkToUpdate.notes = notes
+      }
+
+      //and save
+      return talkToUpdate.save(on: req)
+    }
+
   }
 }
