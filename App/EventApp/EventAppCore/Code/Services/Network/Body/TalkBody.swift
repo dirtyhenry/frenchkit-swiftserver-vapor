@@ -12,7 +12,7 @@ extension Network.Body {
   struct Talk: Encodable {
     var title: String?
     var notes: String?
-    var dueDate: Date?
+    var date: Date?
     var speakerName: String?
   }
 }

@@ -65,4 +65,30 @@ class Network {
     }
   }
 
+  func request(_ route: Router,
+               completion: @escaping (Result<URLResponse, EventsError>) -> Void) {
+
+    do {
+
+      let task = session.dataTask(with: try route.asURLRequest()) { (_, response, error) in
+
+        if let error = error {
+          completion(.failure(.request(underlying: error)))
+        }
+
+        guard let response = response else {
+          completion(.failure(.noData))
+          return
+        }
+
+        completion(.success(response))
+      }
+
+      task.resume()
+
+    } catch {
+      completion(.failure(.route(underlying: error)))
+    }
+  }
+
 }

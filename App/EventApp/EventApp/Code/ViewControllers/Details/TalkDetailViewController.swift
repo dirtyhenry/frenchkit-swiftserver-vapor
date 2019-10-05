@@ -39,6 +39,10 @@ final class TalkDetailViewController: UITableViewController {
     didSet {
       title = talk?.name
 
+      if let talk = talk, let uuid = UUID(uuidString: talk.identifier) {
+        self.updater = TalksUpdater(id: uuid)
+      }
+
       if isViewLoaded {
         configureView()
       }
@@ -46,6 +50,7 @@ final class TalkDetailViewController: UITableViewController {
   }
 
   private var sections: [Section] = []
+  private var updater: TalksUpdater?
 
   // MARK: - Setup
 
@@ -66,6 +71,10 @@ final class TalkDetailViewController: UITableViewController {
     tableView.register(cellType: EditableCell.self)
     tableView.register(cellType: DatePickerCell.self)
     tableView.register(cellType: NotesCell.self)
+
+    if let talk = talk, let uuid = UUID(uuidString: talk.identifier) {
+      self.updater = TalksUpdater(id: uuid)
+    }
 
     configureView()
   }
@@ -145,6 +154,8 @@ final class TalkDetailViewController: UITableViewController {
     if section.title == L10n.talkNameTitle {
       title = sender.text
     }
+
+    sendUpdate()
   }
 
   @objc
@@ -163,6 +174,7 @@ final class TalkDetailViewController: UITableViewController {
       let realm = Realm.safeRealm
       try? realm.write {
         talk?.dueDate = nil
+        sendUpdate()
       }
     }
 
@@ -209,10 +221,17 @@ final class TalkDetailViewController: UITableViewController {
     let realm = Realm.safeRealm
     try? realm.write {
       talk?.dueDate = sender.date
+
+      sendUpdate()
     }
 
   }
 
+  func sendUpdate() {
+    guard let talk = talk else { return }
+
+    updater?.update(talk: talk)
+  }
 }
 
 // MARK: - UITableViewDataSource
@@ -302,6 +321,7 @@ extension TalkDetailViewController {
       toggleDatePicker(onSection: indexPath.section)
     case .delete:
       try? talk?.delete()
+      updater?.delete()
       navigationController?.navigationController?.popViewController(animated: true)
     default:
       break
@@ -335,6 +355,9 @@ extension TalkDetailViewController: UITextViewDelegate {
     let realm = Realm.safeRealm
     try? realm.write {
       talk?.notes = textView.text
+
+      sendUpdate()
     }
+
   }
 }

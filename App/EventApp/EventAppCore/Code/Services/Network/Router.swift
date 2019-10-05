@@ -41,11 +41,14 @@ extension Router {
   }
 
   var body: Data? {
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
+
     switch self {
     case .allTalks: return nil
     case .getTalk: return nil
-    case .createTalk(let body): return try? JSONEncoder().encode(body)
-    case .updateTalk(_, let body): return try? JSONEncoder().encode(body)
+    case .createTalk(let body): return try? encoder.encode(body)
+    case .updateTalk(_, let body): return try? encoder.encode(body)
     case .deleteTalk: return nil
     }
   }
@@ -61,7 +64,11 @@ extension Router {
 
     var request = URLRequest(url: url)
     request.httpMethod = method
-    request.httpBody = body
+
+    if let body = body {
+      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+      request.httpBody = body
+    }
 
     return request
   }

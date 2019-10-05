@@ -106,13 +106,7 @@ class ListingViewController: UITableViewController {
     alert.addAction(UIAlertAction(title: L10n.commonAdd, style: .default, handler: { _ in
 
       let name = alert.textFields?.first?.text ?? ""
-
-      do {
-        try Talk.add(name: name)
-      } catch {
-        self.state = .error(error)
-      }
-
+      self.fetcher.create(title: name)
     }))
 
     self.present(alert, animated: true, completion: nil)
@@ -246,6 +240,12 @@ extension ListingViewController {
 
     if editingStyle == .delete {
       let talk = talks[indexPath.row]
+
+      guard let uuid = UUID(uuidString: talk.identifier) else {
+        return
+      }
+
+      TalksUpdater(id: uuid).delete()
       try? talk.delete()
     }
   }
