@@ -43,6 +43,8 @@ Your browser will help you only for simple GET routes so prefer using a REST cli
 
 If you don't have any yet, I suggest you to get [Postman](https://www.getpostman.com) which is free.
 
+Here is a [shared collection](https://www.getpostman.com/collections/28053ba7d4e08516b288)
+
 ## Build a simple CRUD service
 
 * Open App/EventApp.xcworkspace and build&run the app to see the app for which you're going to build the backend
@@ -59,7 +61,7 @@ If you don't have any yet, I suggest you to get [Postman](https://www.getpostman
 
 ## Share your model with your app
 
-* Clone the new repo <git package repo url> which contains the basics for your new library
+* Clone the new repo `git@github.com:iGranDav/frenchkit-swift-shared.git` which contains the basics for your new library
   * a `Package.swift` file for Swift Package Manager (to use on the server)
   * a `Podspec` file for CocoaPods (to user with iOS)
 
@@ -79,7 +81,7 @@ Now please add unit tests to test the routes you've added earlier.
 
 ## Testing on linux using docker
 
-`Foundation` you use on macOS is not the same source code than the one you use on linux. Your server will certainly runs on linux so you need to test on it!
+`Foundation` you use on macOS with cocoa is not the same source code than the one you use on linux. Your server will certainly runs on linux so you need to test on it!
 
 Docker permits that by using a Dockerfile to run `swift test` on a linux container.
 
