@@ -47,6 +47,20 @@ final class TalksTests: XCTestCase {
     XCTAssertEqual(response[0].title, talk.title)
   }
 
+  func test_talkGetFromAPI() throws {
+
+    let talk = try Talk.create(title: expectedTitle, on: conn)
+
+    XCTAssertEqual(talk.title, expectedTitle)
+
+    let talkId = try talk.requireID()
+    let response = try app.getResponse(to: URI+"/\(talkId)", decodeTo: Talk.self)
+
+    XCTAssertNotNil(response)
+    XCTAssertEqual(response.id, talkId)
+    XCTAssertEqual(response.title, talk.title)
+  }
+
   func test_talkCreationFromAPI() throws {
 
     let talk = Talk(title: expectedTitle)
@@ -58,6 +72,30 @@ final class TalksTests: XCTestCase {
 
     XCTAssertEqual(received.title, talk.title)
     XCTAssertNotNil(received.id)
+  }
+
+  func test_talkUpdateFromAPI() throws {
+
+    let initialTalk = try Talk.create(title: expectedTitle, on: conn)
+    let newTalkData = Talk(title: "New awesome title")
+    newTalkData.speakerName = "speaker"
+    newTalkData.notes = "some notes"
+    newTalkData.date = Date()
+
+    let talkId = try initialTalk.requireID()
+    let response = try app.getResponse(
+      to: URI+"\(talkId)",
+      method: .PUT,
+      headers: ["Content-Type": "application/json"],
+      data: newTalkData,
+      decodeTo: Talk.self)
+
+    XCTAssertNotNil(response)
+    XCTAssertEqual(response.id, talkId)
+    XCTAssertEqual(response.title, newTalkData.title)
+    XCTAssertEqual(response.speakerName, newTalkData.speakerName)
+    XCTAssertEqual(response.notes, newTalkData.notes)
+    XCTAssertNotNil(response.date)
   }
 
   func test_talkDeleteFromAPI() throws {
@@ -75,7 +113,9 @@ final class TalksTests: XCTestCase {
 
   static let allTests = [
     ("test_talksListingFromAPI", test_talksListingFromAPI),
+    ("test_talkGetFromAPI", test_talkGetFromAPI),
     ("test_talkCreationFromAPI", test_talkCreationFromAPI),
+    ("test_talkUpdateFromAPI", test_talkUpdateFromAPI),
     ("test_talkDeleteFromAPI", test_talkDeleteFromAPI)
   ]
 }

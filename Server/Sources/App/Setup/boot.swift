@@ -4,6 +4,8 @@ import FluentSQLite
 /// Called after your application has initialized.
 public func boot(_ app: Application) throws {
 
+  guard app.environment != .testing else { return }
+
   _ = try app.connectionPool(to: .sqlite).withConnection { conn in
     Talk.query(on: conn).all().map { talks in
       guard talks.isEmpty else { return }
