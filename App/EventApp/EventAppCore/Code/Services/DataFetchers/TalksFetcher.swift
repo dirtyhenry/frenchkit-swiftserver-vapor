@@ -22,8 +22,14 @@ public struct TalksFetcher {
 
         let talksToUpdate = talks.compactMap { Talk.from(shared: $0) }
         let realm = Realm.safeRealm
+
+        let talksToDelete = realm.objects(Talk.self).filter {
+          !talksToUpdate.contains($0)
+        }
+
         try? realm.write {
           realm.add(talksToUpdate, update: .modified)
+          realm.delete(talksToDelete)
         }
 
       case .failure(let error):
