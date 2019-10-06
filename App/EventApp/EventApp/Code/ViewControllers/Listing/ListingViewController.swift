@@ -28,6 +28,7 @@ class ListingViewController: UITableViewController {
     }
   }
 
+  private let fetcher = TalksFetcher()
   private var talksToken: NotificationToken?
 
   // MARK: - Setup
@@ -78,6 +79,8 @@ class ListingViewController: UITableViewController {
       }
 
     }
+
+    reloadData()
   }
 
   deinit {
@@ -105,13 +108,7 @@ class ListingViewController: UITableViewController {
     alert.addAction(UIAlertAction(title: L10n.commonAdd, style: .default, handler: { _ in
 
       let name = alert.textFields?.first?.text ?? ""
-
-      do {
-        try Talk.add(name: name)
-      } catch {
-        self.state = .error(error)
-      }
-
+      self.fetcher.create(title: name)
     }))
 
     self.present(alert, animated: true, completion: nil)
@@ -126,6 +123,8 @@ class ListingViewController: UITableViewController {
 
     let talks = Realm.safeRealm.objects(Talk.self).sorted(byKeyPath: #keyPath(Talk.dateModified))
     state = talks.isEmpty ? .empty : .data(talks)
+
+    fetcher.fetchAll()
 
     refreshControl?.endRefreshing()
   }
@@ -243,6 +242,12 @@ extension ListingViewController {
 
     if editingStyle == .delete {
       let talk = talks[indexPath.row]
+
+      guard let uuid = UUID(uuidString: talk.identifier) else {
+        return
+      }
+
+      TalksUpdater(id: uuid).delete()
       try? talk.delete()
     }
   }
