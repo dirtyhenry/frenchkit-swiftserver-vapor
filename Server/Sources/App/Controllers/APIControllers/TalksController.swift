@@ -29,19 +29,28 @@ final class TalksController: RouteCollection {
   /// Deletes a parameterized `Talk`.
   func delete(_ req: Request) throws -> Future<HTTPStatus> {
     return try req.parameters.next(Talk.self)
-      .flatMap { talk in
+      .map { talk in
         talk.delete(on: req)
       }
       .transform(to: .noContent)
   }
 
   func get(_ req: Request) throws -> Future<Talk> {
-    // Please implement this
-    throw Abort(.notFound)
+    return try req.parameters.next(Talk.self)
   }
 
-  func update(_ req: Request) throws -> Future<Talk> {
-    // Please implement this
-    throw Abort(.notFound)
+    func update(_ req: Request) throws -> Future<Talk> {
+
+        return flatMap(try req.parameters.next(Talk.self),
+                       try req.content.decode(Talk.Update.self)) { (talkToUpdate, newData) in
+                        
+                        if let title = newData.title {
+                            talkToUpdate.title = title
+                        }
+
+                        // Complete with optional to replace just was present.
+
+                        return talkToUpdate.save(on: req)
+        }
   }
 }
